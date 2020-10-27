@@ -1,3 +1,14 @@
+/* Responsive height */
+@media (min-width: 768px){
+    main {
+        height: calc(100vh - 88px);
+    }
+
+    main > * {
+        height: 100%;
+    }
+}
+
 aside {
     background-color: #eeeeee;
 }
