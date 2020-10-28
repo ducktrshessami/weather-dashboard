@@ -9,6 +9,14 @@
     }
 }
 
+.curImg {
+    height: 2.5rem;
+}
+
 aside {
     background-color: #eeeeee;
+}
+
+.forecast {
+    width: 19%;
 }
