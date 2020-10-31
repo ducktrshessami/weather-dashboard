@@ -1,6 +1,6 @@
 # weather-dashboard
 Homework 6
 
-Condition icons by [Joshua Porter](https://dribbble.com/shots/1162508-Weather-Icons)
+Weather condition data and icons by [OpenWeather ](https://openweathermap.org/)
 
 Deployment: [Weather Dashboard](https://ducktrshessami.github.io/weather-dashboard/)
