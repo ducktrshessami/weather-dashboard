@@ -62,7 +62,7 @@
             for (let i = 0; i < recentSearches.length - 1; i++) {
                 historyEl.prepend(`<li class='list-group-item' role='button'>${recentSearches[i].loc}</li>`);
             }
-            displayCity(recentSearches[recentSearches.length - 1].loc);
+            getCityData(recentSearches[recentSearches.length - 1].loc).then(displayCity).catch(alert);
         }
     }
 
@@ -75,40 +75,8 @@
 
     /*
     */
-    async function displayCity(city) {
-        let cityData;
-        let recentIndex = recentSearches.findIndex(data => data.loc == city);
-
-        if (recentIndex !== -1 && verifyCache(recentSearches[recentIndex].cache)) {
-            // Data is cached
-            cityData = recentSearches[recentIndex];
-        }
-        else {
-            // Remove outdated cache
-            recentSearches.splice(recentIndex, 1);
-
-            try {
-                // Get new data
-                cityData = await getWeatherFormatted(city);
-            }
-            catch {
-                // Stop here
-                storeHistory(); // Invalid history item removed
-                alert("Could not get weather conditions for " + city);
-                return;
-            }
-            /*
-            Minimizing load time by means of a temporary weather-condition cache meant possibly
-            skipping over the asynchronous API call. Therefore, error handling needed to be
-            synchronous. 
-            */
-
-            // Update stored history
-            recentSearches.push(cityData);
-            storeHistory();
-        }
-
-        // Display data
+    async function displayCity(cityData) {
+        // Fill content
         curLocEl.textContent = cityData.loc;
         curLocImgEl.attr("src", cityData.cache.current.icon.src);
         curLocImgEl.attr("alt", cityData.cache.current.icon.alt);
@@ -131,9 +99,9 @@
         }
 
         // Update history display
-        $("li.active[role='button']", historyEl).removeClass("active").attr("role", "button");
+        $("li.active[role!='button']", historyEl).removeClass("active").attr("role", "button");
         if (!$(`:contains(${cityData.loc})`, historyEl).length) {
-            historyEl.prepend(`<li class='list-group-item'>${city}</li>`);
+            historyEl.prepend(`<li class='list-group-item'>${cityData.loc}</li>`);
         }
         $(`li:contains(${cityData.loc}):not(.active[role='button'])`).addClass("active").attr("role", "");
 
@@ -146,6 +114,48 @@
 
     /*
     */
+    function getCityData(city) {
+        return new Promise(async function(resolve, reject) {
+            let cityData;
+            let recentIndex = recentSearches.findIndex(data => data.loc == city);
+
+            if (recentIndex !== -1 && verifyCache(recentSearches[recentIndex].cache)) {
+                // Data is cached
+                cityData = recentSearches[recentIndex];
+            }
+            else {
+                // Remove outdated cache
+                if (recentIndex !== -1) {
+                    recentSearches.splice(recentIndex, 1);
+                }
+
+                try {
+                    // Get new data
+                    cityData = await getWeatherFormatted(city);
+                }
+                catch {
+                    // Stop here
+                    storeHistory(); // Invalid history item removed
+                    reject("Could not get weather conditions for " + city);
+                    return;
+                }
+                /*
+                Minimizing load time by means of a temporary weather-condition cache meant possibly
+                skipping over the asynchronous API call. Therefore, error handling needed to be
+                synchronous. This resulted in a promise/try/catch mesh, but it gets the job done.
+                */
+
+                // Update stored history
+                recentSearches.push(cityData);
+                storeHistory();
+            }
+
+            resolve(cityData);
+        });
+    }
+
+    /*
+    */
     function verifyCache(data) {
         return data.timestamp && (Date.now() - data.timestamp < cacheLife * 60000);
     }
@@ -153,13 +163,16 @@
     /*
     */
     function search(event) {
-
+        event.preventDefault();
+        getCityData(searchQueryEl.val().trim()).then(displayCity).catch(alert);
     }
 
     /*
     */
     function dispHist(event) {
-
+        if (!event.target.className.includes("active")) {
+            getCityData(event.target.textContent.trim()).then(displayCity).catch(alert);
+        }
     }
 
     init();
