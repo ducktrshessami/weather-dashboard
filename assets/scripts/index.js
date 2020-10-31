@@ -1,7 +1,8 @@
 (function() { // Enclose scope for debugging
 
     // Settings
-    var cacheLife = 60; // minutes
+    const cacheLife = 60; // minutes
+    const apiKey = "b9214a3e75f89a779e45140f10a5ab2c"; // Weather API verification
 
     /**********/
 
@@ -23,6 +24,7 @@
     Initialize the page
     */
     function init() {
+        setWeatherApiKey(apiKey);
         initElems();
         initHistory();
     }
@@ -66,19 +68,20 @@
 
     /*
     */
-    function displayCity(city) {
+    async function displayCity(city) {
         let cityData;
         let recentIndex = recentSearches.findIndex(data => data.loc == city);
 
         if (recentIndex !== -1 && verifyCache(recentSearches[recentIndex].cache)) {
-             // Cached data
-            cityData = recentSearches.splice(recentIndex, 1)[0];
+            // Data is cached
+            cityData = recentSearches[recentIndex];
         }
         else {
-            // Get data from OpenWeather
-            if (recentIndex !== 1) {
-                cityData = recentSearches.splice(recentIndex, 1)[0];
-            }
+            // Remove outdated cache
+            recentSearches.splice(recentIndex, 1);
+
+            // Get new data
+            cityData = await getWeatherFormatted(city);
 
             // Update stored history
             recentSearches.push(cityData);
