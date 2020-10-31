@@ -1,15 +1,23 @@
 (function() { // Enclose scope for debugging
 
     // Settings
-    var cacheLife = 60;
+    var cacheLife = 60; // minutes
 
     /**********/
 
     var recentSearches;
     var display;
 
-    var curLocEl;
     var historyEl;
+
+    var curLocEl;
+    var curLocImgEl;
+    var curTempEl;
+    var curHumidEl;
+    var curWindEl;
+    var curUvEl;
+
+    var forecastEl;
 
     /*
     Initialize the page
@@ -23,9 +31,14 @@
     */
     function initElems() {
         let foo = $("#curLocation");
+        historyEl = $("#history");
         curLocEl = foo.get(0).childNodes[0]; // The only non-jQuery element stored
         curLocImgEl = foo.children();
-        historyEl = $("#history");
+        curTempEl = $("#curTemp");
+        curHumidEl = $("#curHumid");
+        curWindEl = $("#curWind");
+        curUvEl = $("#curUV");
+        forecastEl = $("#forecast");
     }
 
     /*
@@ -68,7 +81,7 @@
         }
 
         // Display data
-        curLocEl.textContent = city;
+        curLocEl.textContent = cityData.loc;
 
         // Update stored history
         recentSearches.push(cityData);
