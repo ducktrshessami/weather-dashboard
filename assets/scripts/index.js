@@ -51,7 +51,7 @@
         // Display
         if (recentSearches.length) {
             for (let i = 0; i < recentSearches.length - 1; i++) {
-                historyEl.prepend("<li class='list-group-item' role='button'>" + recentSearches[i].loc + "</li>");
+                historyEl.prepend(`<li class='list-group-item' role='button'>${recentSearches[i].loc}</li>`);
             }
             displayCity(recentSearches[recentSearches.length - 1].loc);
         }
@@ -71,6 +71,7 @@
         let recentIndex = recentSearches.findIndex(data => data.loc == city);
 
         if (recentIndex !== -1 && verifyCache(recentSearches[recentIndex].cache)) {
+             // Cached data
             cityData = recentSearches.splice(recentIndex, 1)[0];
         }
         else {
@@ -78,19 +79,39 @@
             if (recentIndex !== 1) {
                 cityData = recentSearches.splice(recentIndex, 1)[0];
             }
+
+            // Update stored history
+            recentSearches.push(cityData);
+            storeHistory();
         }
 
         // Display data
         curLocEl.textContent = cityData.loc;
-
-        // Update stored history
-        recentSearches.push(cityData);
-        storeHistory();
+        curLocImgEl.attr("src");
+        curTempEl.text(cityData.cache.current.temp);
+        curHumidEl.text(cityData.cache.current.humid);
+        curWindEl.text(cityData.cache.current.wind);
+        curUvEl.text(cityData.cache.current.uv);
+        forecastEl.empty();
+        for (let i = 0; i < cityData.cache.forecast.length; i++) {
+            forecastEl.append(`
+            <li class="forecast card bg-primary text-white mr-auto">
+                <div class="card-body">
+                    <h4 class="card-title">${date}</h4>
+                    <img src="${icon}" class="card-img w-50">
+                    <p class="card-text">Temp: ${temp} &#8457;</p>
+                    <p class="card-text">Humidity: ${humid}%</p>
+                </div>
+            </li>
+            `);
+        }
 
         // Update history display
-        $("li:contains(" + city + ")", historyEl).remove();
-        $("li.active", historyEl).removeClass("active");
-        historyEl.prepend("<li class='list-group-item active' role='button'>" + city + "</li>");
+        $("li.active[role='button']", historyEl).removeClass("active").attr("role", "button");
+        if (!$(`:contains(${cityData.loc})`).length) {
+            historyEl.prepend(`<li class='list-group-item'>${city}</li>`);
+        }
+        $(`li:contains(${cityData.loc}):not(.active[role='button'])`).addClass("active").attr("role", "");
 
         // Display page if first query
         if (!display) {
