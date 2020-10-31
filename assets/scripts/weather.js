@@ -8,6 +8,26 @@ function setWeatherApiKey(key) {
 
 /*
 */
+function getUVSeverityColor(uvi) {
+    if (uvi < 3) {
+        return "#52e735";
+    }
+    else if (uvi < 6) {
+        return "#DCE42F";
+    }
+    else if (uvi < 8) {
+        return "#CEA237";
+    }
+    else if (uvi < 11) {
+        return "#C42440";
+    }
+    else {
+        return "#C126E2";
+    }
+}
+
+/*
+*/
 function getWeatherFormatted(query) {
     return new Promise(function(resolve, reject) {
         getWeatherCurrent(query, reject).then(current => {
