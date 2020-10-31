@@ -37,7 +37,7 @@ function getWeatherFormatted(query) {
                                 temp: item.temp.day,
                                 humid: item.humidity
                             };
-                        })
+                        }).slice(1, 6)
                     }
                 });
             });
