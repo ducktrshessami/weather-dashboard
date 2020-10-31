@@ -90,7 +90,8 @@
 
         // Display data
         curLocEl.textContent = cityData.loc;
-        curLocImgEl.attr("src");
+        curLocImgEl.attr("src", cityData.cache.current.icon.src);
+        curLocImgEl.attr("alt", cityData.cache.current.icon.alt);
         curTempEl.text(cityData.cache.current.temp + " ℉");
         curHumidEl.text(cityData.cache.current.humid + "%");
         curWindEl.text(cityData.cache.current.wind + " MPH");
@@ -111,7 +112,7 @@
 
         // Update history display
         $("li.active[role='button']", historyEl).removeClass("active").attr("role", "button");
-        if (!$(`:contains(${cityData.loc})`).length) {
+        if (!$(`:contains(${cityData.loc})`, historyEl).length) {
             historyEl.prepend(`<li class='list-group-item'>${city}</li>`);
         }
         $(`li:contains(${cityData.loc}):not(.active[role='button'])`).addClass("active").attr("role", "");
