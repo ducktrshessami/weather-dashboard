@@ -1,14 +1,3 @@
-/* Responsive height */
-@media (min-width: 768px){
-    main {
-        height: calc(100vh - 88px);
-    }
-
-    main > * {
-        height: 100%;
-    }
-}
-
 .curImg {
     height: 2.5rem;
 }
@@ -18,5 +7,29 @@ aside {
 }
 
 .forecast {
-    width: 19%;
+    width: 50%;
+}
+
+/* Responsive */
+@media (min-width: 768px){
+    main {
+        height: calc(100vh - 88px);
+    }
+
+    main > * {
+        height: 100%;
+    }
+
+    .forecast {
+        width: 19%;
+        margin: 0 auto 0 auto;
+    }
+
+    .forecast:first-child {
+        margin-left: 0;
+    }
+    
+    .forecast:last-child {
+        margin-right: 0;
+    }
 }

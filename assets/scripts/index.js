@@ -87,7 +87,7 @@
         forecastEl.empty();
         for (let i = 0; i < cityData.cache.forecast.length && i < 5; i++) {
             forecastEl.append(`
-            <li class="forecast card bg-primary text-white mr-auto">
+            <li class="forecast card bg-primary text-white mb-3">
                 <div class="card-body">
                     <h4 class="card-title">${cityData.cache.forecast[i].date}</h4>
                     <img src="${cityData.cache.forecast[i].icon.src}" alt="${cityData.cache.forecast[i].icon.alt}" class="card-img w-50">
