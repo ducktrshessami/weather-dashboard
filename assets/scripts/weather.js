@@ -50,7 +50,7 @@ function getWeatherFormatted(query) {
 function getWeatherCurrent(query, fail) {
     return $.ajax({
         method: "get",
-        url: `http://api.openweathermap.org/data/2.5/weather?appid=${apikey}&units=imperial&q=${query}`,
+        url: `https://api.openweathermap.org/data/2.5/weather?appid=${apikey}&units=imperial&q=${query}`,
         error: fail
     });
 }
