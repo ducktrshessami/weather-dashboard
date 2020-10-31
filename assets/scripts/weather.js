@@ -18,7 +18,7 @@ function getWeatherFormatted(query) {
                         timestamp: Date.now(),
                         current: {
                             icon: {
-                                src: `http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`,
+                                src: `https://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`,
                                 alt: current.weather[0].main
                             },
                             temp: current.main.temp,
@@ -31,7 +31,7 @@ function getWeatherFormatted(query) {
                             return {
                                 date: `${day.getMonth() + 1}/${day.getDate()}/${day.getFullYear()}`,
                                 icon: {
-                                    src: `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`,
+                                    src: `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`,
                                     alt: item.weather[0].main
                                 },
                                 temp: item.temp.day,
