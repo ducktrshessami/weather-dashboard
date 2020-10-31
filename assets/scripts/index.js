@@ -157,7 +157,15 @@
     /*
     */
     function verifyCache(data) {
-        return data.timestamp && (Date.now() - data.timestamp < cacheLife * 60000);
+        return (
+            data.timestamp
+            && (Date.now() - data.timestamp < cacheLife * 60000)
+            && data.current.temp
+            && data.current.humid
+            && data.current.wind
+            && data.current.uv
+            && data.forecast.length
+        );
     }
 
     /*
