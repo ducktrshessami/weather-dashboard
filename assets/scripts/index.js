@@ -91,19 +91,19 @@
         // Display data
         curLocEl.textContent = cityData.loc;
         curLocImgEl.attr("src");
-        curTempEl.text(cityData.cache.current.temp);
-        curHumidEl.text(cityData.cache.current.humid);
-        curWindEl.text(cityData.cache.current.wind);
+        curTempEl.text(cityData.cache.current.temp + " ℉");
+        curHumidEl.text(cityData.cache.current.humid + "%");
+        curWindEl.text(cityData.cache.current.wind + " MPH");
         curUvEl.text(cityData.cache.current.uv);
         forecastEl.empty();
-        for (let i = 0; i < cityData.cache.forecast.length; i++) {
+        for (let i = 0; i < cityData.cache.forecast.length && i < 5; i++) {
             forecastEl.append(`
             <li class="forecast card bg-primary text-white mr-auto">
                 <div class="card-body">
-                    <h4 class="card-title">${date}</h4>
-                    <img src="${icon}" class="card-img w-50">
-                    <p class="card-text">Temp: ${temp} &#8457;</p>
-                    <p class="card-text">Humidity: ${humid}%</p>
+                    <h4 class="card-title">${cityData.cache.forecast[i].date}</h4>
+                    <img src="${cityData.cache.forecast[i].icon.src}" alt="${cityData.cache.forecast[i].icon.alt}" class="card-img w-50">
+                    <p class="card-text">Temp: ${cityData.cache.forecast[i].temp} &#8457;</p>
+                    <p class="card-text">Humidity: ${cityData.cache.forecast[i].humid}%</p>
                 </div>
             </li>
             `);
