@@ -19,11 +19,11 @@
         <div class="row">
             <!-- Sidebar -->
             <aside id="sidebar" class="p-3 col-md-4 col-lg-3 d-md-block collapse">
-                <h4>Search for a city:</h4>
-                <div class="mb-3">
+                <h4>Search for a location:</h4>
+                <form class="mb-3">
                     <input type="text" id="search" class="w-75 align-baseline">
                     <button id="searchBtn" class="btn btn-primary btn-sm align-baseline">&#x1F50D;</button>
-                </div>
+                </form>
                 <ul id="history" class="list-group">
                     <!-- Recent searches -->
                 </ul>
@@ -33,7 +33,7 @@
                 <!-- Current weather -->
                 <article class="card w-100 mb-4">
                     <div class="card-body">
-                        <h3 id="curLocation" class="card-title"> <img src="./assets/images/sunny.png" class="curImg ml-1"></h3>
+                        <h3 id="curLocation" class="card-title"> <img alt="Current condition" class="curImg ml-1"></h3>
                         <p class="card-text">Temperature: <span id="curTemp"></span></p>
                         <p class="card-text">Humidity: <span id="curHumid"></span></p>
                         <p class="card-text">Wind Speed: <span id="curWind"></span></p>
