@@ -13,7 +13,10 @@ function getWeatherFormatted(query) {
         getWeatherCurrent(query).then(current => {
             getWeatherForecast(current.coord.lat, current.coord.lon).then(forecast => {
                 resolve({
-                    //stuff
+                    loc: current.name,
+                    cache: {
+                        
+                    }
                 });
             });
         });
@@ -34,6 +37,6 @@ function getWeatherCurrent(query) {
 function getWeatherForecast(lat, lon) {
     return $.ajax({
         method: "get",
-        url: `http://api.openweathermap.org/data/2.5/forecast/daily?appid=${apikey}&units=imperial&exclude=current,minutely,hourly,alerts&lat=${lat}&lon=${lon}`
+        url: `https://api.openweathermap.org/data/2.5/onecall?appid=${apikey}&units=imperial&exclude=current,minutely,hourly,alerts&lat=${lat}&lon=${lon}`
     });
 }
