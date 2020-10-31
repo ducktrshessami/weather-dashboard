@@ -80,8 +80,21 @@
             // Remove outdated cache
             recentSearches.splice(recentIndex, 1);
 
-            // Get new data
-            cityData = await getWeatherFormatted(city);
+            try {
+                // Get new data
+                cityData = await getWeatherFormatted(city);
+            }
+            catch {
+                // Stop here
+                storeHistory(); // Invalid history item removed
+                alert("Could not get weather conditions for " + city);
+                return;
+            }
+            /*
+            Minimizing load time by means of a temporary weather-condition cache meant possibly
+            skipping over the asynchronous API call. Therefore, error handling needed to be
+            synchronous. 
+            */
 
             // Update stored history
             recentSearches.push(cityData);

@@ -10,8 +10,8 @@ function setWeatherApiKey(key) {
 */
 function getWeatherFormatted(query) {
     return new Promise(function(resolve, reject) {
-        getWeatherCurrent(query).then(current => {
-            getWeatherForecast(current.coord.lat, current.coord.lon).then(future => {
+        getWeatherCurrent(query, reject).then(current => {
+            getWeatherForecast(current.coord.lat, current.coord.lon, reject).then(future => {
                 resolve({
                     loc: current.name,
                     cache: {
@@ -47,18 +47,20 @@ function getWeatherFormatted(query) {
 
 /*
 */
-function getWeatherCurrent(query) {
+function getWeatherCurrent(query, fail) {
     return $.ajax({
         method: "get",
-        url: `http://api.openweathermap.org/data/2.5/weather?appid=${apikey}&units=imperial&q=${query}`
+        url: `http://api.openweathermap.org/data/2.5/weather?appid=${apikey}&units=imperial&q=${query}`,
+        error: fail
     });
 }
 
 /*
 */
-function getWeatherForecast(lat, lon) {
+function getWeatherForecast(lat, lon, fail) {
     return $.ajax({
         method: "get",
-        url: `https://api.openweathermap.org/data/2.5/onecall?appid=${apikey}&units=imperial&exclude=current,minutely,hourly,alerts&lat=${lat}&lon=${lon}`
+        url: `https://api.openweathermap.org/data/2.5/onecall?appid=${apikey}&units=imperial&exclude=current,minutely,hourly,alerts&lat=${lat}&lon=${lon}`,
+        error: fail
     });
 }
