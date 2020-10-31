@@ -96,7 +96,7 @@
         curWindEl.text(cityData.cache.current.wind + " MPH");
         curUvEl.text(cityData.cache.current.uv);
         forecastEl.empty();
-        for (let i = 0; i < cityData.cache.forecast.length && i < 5; i++) {
+        for (let i = 1; i < cityData.cache.forecast.length && i < 6; i++) {
             forecastEl.append(`
             <li class="forecast card bg-primary text-white mr-auto">
                 <div class="card-body">

@@ -11,11 +11,33 @@ function setWeatherApiKey(key) {
 function getWeatherFormatted(query) {
     return new Promise(function(resolve, reject) {
         getWeatherCurrent(query).then(current => {
-            getWeatherForecast(current.coord.lat, current.coord.lon).then(forecast => {
+            getWeatherForecast(current.coord.lat, current.coord.lon).then(future => {
                 resolve({
                     loc: current.name,
                     cache: {
-                        
+                        timestamp: Date.now(),
+                        current: {
+                            icon: {
+                                src: `http://openweathermap.org/img/wn/${current.weather.icon}@2x.png`,
+                                alt: current.weather.main
+                            },
+                            temp: current.main.temp,
+                            humid: current.main.humidity,
+                            wind: current.wind.speed,
+                            uv: future.daily[0].uvi
+                        },
+                        forecast: future.daily.map(item => {
+                            let day = new Date(item.dt * 1000);
+                            return {
+                                date: `${day.getMonth() + 1}/${day.getDate()}/${day.getFullYear()}`,
+                                icon: {
+                                    src: `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`,
+                                    alt: item.weather[0].main
+                                },
+                                temp: item.temp.day,
+                                humid: item.humidity
+                            };
+                        })
                     }
                 });
             });
