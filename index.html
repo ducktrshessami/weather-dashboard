@@ -31,7 +31,7 @@
             <!-- Content -->
             <section id="display" class="p-3 col-md-8 col-lg-9 d-none">
                 <!-- Current weather -->
-                <article id="curWeather" class="card w-100 mb-4">
+                <article class="card w-100 mb-4">
                     <div class="card-body">
                         <h3 id="curLocation" class="card-title"> <img src="./assets/images/sunny.png" class="curImg ml-1"></h3>
                         <p class="card-text">Temperature: <span id="curTemp"></span></p>
@@ -41,42 +41,11 @@
                     </div>
                 </article>
                 <!-- Forecast -->
-                <article id="forecast">
+                <article>
                     <h3 class="mb-3">5-Day Forecast:</h3>
-                    <ul class="list-group list-group-horizontal w-100">
+                    <ul id="forecast" class="list-group list-group-horizontal w-100">
+                        <!-- Forecast cards go here -->
                         <li class="forecast card bg-primary text-white mr-auto">
-                            <div class="card-body">
-                                <h4 class="card-title">some date</h4>
-                                <img src="./assets/images/sunny.png" class="card-img w-50">
-                                <p class="card-text">temp: some temp</p>
-                                <p class="card-text">humidity: some humid</p>
-                            </div>
-                        </li>
-                        <li class="forecast card bg-primary text-white mx-auto">
-                            <div class="card-body">
-                                <h4 class="card-title">some date</h4>
-                                <img src="./assets/images/sunny.png" class="card-img w-50">
-                                <p class="card-text">temp: some temp</p>
-                                <p class="card-text">humidity: some humid</p>
-                            </div>
-                        </li>
-                        <li class="forecast card bg-primary text-white mx-auto">
-                            <div class="card-body">
-                                <h4 class="card-title">some date</h4>
-                                <img src="./assets/images/sunny.png" class="card-img w-50">
-                                <p class="card-text">temp: some temp</p>
-                                <p class="card-text">humidity: some humid</p>
-                            </div>
-                        </li>
-                        <li class="forecast card bg-primary text-white mx-auto">
-                            <div class="card-body">
-                                <h4 class="card-title">some date</h4>
-                                <img src="./assets/images/sunny.png" class="card-img w-50">
-                                <p class="card-text">temp: some temp</p>
-                                <p class="card-text">humidity: some humid</p>
-                            </div>
-                        </li>
-                        <li class="forecast card bg-primary text-white ml-auto">
                             <div class="card-body">
                                 <h4 class="card-title">some date</h4>
                                 <img src="./assets/images/sunny.png" class="card-img w-50">
