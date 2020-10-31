@@ -37,6 +37,7 @@
     }
 
     /*
+    Initialize vars with their respective elements
     */
     function initElems() {
         let foo = $("#curLocation");
@@ -54,6 +55,7 @@
     }
 
     /*
+    Initialize search history, display it, and display most recent search
     */
     function initHistory() {
         // Get
@@ -70,12 +72,16 @@
     }
 
     /*
+    Write history to local storage
     */
     function storeHistory() {
         let relevant = recentSearches.map(item => item.loc);
         localStorage.setItem("recentSearches", JSON.stringify(relevant));
     }
 
+    /*
+    Clear search history
+    */
     function clearHistory() {
         recentSearches = [];
         historyEl.empty();
@@ -83,6 +89,10 @@
     }
 
     /*
+    Write weather condition data to page
+    @params:
+    cityData - an object containing relevant weather condition data obtained from
+                getCityData
     */
     function displayCity(cityData) {
         let timestamp = new Date(cityData.cache.timestamp);
@@ -125,6 +135,11 @@
     }
 
     /*
+    Get weather condition data from cache or interface with OpenWeather API to get data
+    @params:
+    city - a string containing the name of the location to get data for
+    @returns:
+    a Promise that resolves in formatted weather condition data
     */
     function getCityData(city) {
         return new Promise(async function(resolve, reject) {
@@ -167,6 +182,11 @@
     }
 
     /*
+    Roughly validates weather-condition data cache to be displayed
+    @params:
+    data - an object containing cached data
+    @returns:
+    a Boolean of whether the data is valid or not
     */
     function verifyCache(data) {
         return (
@@ -181,6 +201,9 @@
     }
 
     /*
+    Search for a new location with the search bar
+    @params:
+    event - a click event from clicking the search button
     */
     function search(event) {
         event.preventDefault();
@@ -191,6 +214,9 @@
     }
 
     /*
+    Display a recently searched location
+    @params:
+    event - a click even from clicking a recently searched location
     */
     function dispHist(event) {
         if (!event.target.className.includes("active")) {
