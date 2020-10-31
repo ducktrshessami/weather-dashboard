@@ -12,6 +12,7 @@
     var searchQueryEl;
     var searchBtnEl;
 
+    var historyBtnEl;
     var historyEl;
 
     var curLocEl;
@@ -31,6 +32,7 @@
         initElems();
         initHistory();
         searchBtnEl.click(search);
+        historyBtnEl.click(clearHistory);
         historyEl.click(dispHist);
     }
 
@@ -39,7 +41,8 @@
     function initElems() {
         let foo = $("#curLocation");
         searchQueryEl = $("#search");
-        searchBtnEl = $("#searchBtn")
+        searchBtnEl = $("#searchBtn");
+        historyBtnEl = $("#historyClear");
         historyEl = $("#history");
         curLocEl = foo.get(0).childNodes[0]; // The only non-jQuery element stored
         curLocImgEl = foo.children();
@@ -71,6 +74,12 @@
     function storeHistory() {
         let relevant = recentSearches.map(item => item.loc);
         localStorage.setItem("recentSearches", JSON.stringify(relevant));
+    }
+
+    function clearHistory() {
+        recentSearches = [];
+        historyEl.empty();
+        storeHistory();
     }
 
     /*
