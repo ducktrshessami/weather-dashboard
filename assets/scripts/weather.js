@@ -10,11 +10,11 @@ function setWeatherApiKey(key) {
 */
 function getWeatherFormatted(query) {
     return new Promise(function(resolve, reject) {
-        Promise.all([getWeatherCurrent(query), getWeatherForecast(query)]).then(responses => {
-            let current = responses[0];
-            let future = responses[1];
-            resolve({
-                //stuff
+        getWeatherCurrent(query).then(current => {
+            getWeatherForecast(current.coord.lat, current.coord.lon).then(forecast => {
+                resolve({
+                    //stuff
+                });
             });
         });
     });
@@ -25,15 +25,15 @@ function getWeatherFormatted(query) {
 function getWeatherCurrent(query) {
     return $.ajax({
         method: "get",
-        url: `https://api.openweathermap.org/data/2.5/weather?appid=${apikey}&q=${query}`
+        url: `http://api.openweathermap.org/data/2.5/weather?appid=${apikey}&units=imperial&q=${query}`
     });
 }
 
 /*
 */
-function getWeatherForecast(query) {
+function getWeatherForecast(lat, lon) {
     return $.ajax({
         method: "get",
-        url: `https://api.openweathermap.org/data/2.5/forecast/daily?appid=${apikey}&cnt=5&q=${query}`
+        url: `http://api.openweathermap.org/data/2.5/forecast/daily?appid=${apikey}&units=imperial&exclude=current,minutely,hourly,alerts&lat=${lat}&lon=${lon}`
     });
 }
