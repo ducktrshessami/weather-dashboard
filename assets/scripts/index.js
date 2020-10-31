@@ -75,7 +75,7 @@
 
     /*
     */
-    async function displayCity(cityData) {
+    function displayCity(cityData) {
         // Fill content
         curLocEl.textContent = cityData.loc;
         curLocImgEl.attr("src", cityData.cache.current.icon.src);
@@ -164,7 +164,10 @@
     */
     function search(event) {
         event.preventDefault();
-        getCityData(searchQueryEl.val().trim()).then(displayCity).catch(alert);
+        getCityData(searchQueryEl.val().trim()).then(data => {
+            searchQueryEl.val("");
+            displayCity(data);
+        }).catch(alert);
     }
 
     /*
