@@ -2,7 +2,7 @@
 
     // Settings
     const cacheLife = 60; // minutes
-    const apiKey = "b9214a3e75f89a779e45140f10a5ab2c"; // Weather API verification
+    const apiKey = "b9214a3e75f89a779e45140f10a5ab2c"; // OpenWeather API key
 
     /**********/
 
