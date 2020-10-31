@@ -76,8 +76,10 @@
     /*
     */
     function displayCity(cityData) {
+        let timestamp = new Date(cityData.cache.timestamp);
+        
         // Fill content
-        curLocEl.textContent = cityData.loc;
+        curLocEl.textContent = `${cityData.loc} (${timestamp.getMonth() + 1}/${timestamp.getDate()}/${timestamp.getFullYear()})`;
         curLocImgEl.attr("src", cityData.cache.current.icon.src);
         curLocImgEl.attr("alt", cityData.cache.current.icon.alt);
         curTempEl.text(cityData.cache.current.temp + " ℉");
