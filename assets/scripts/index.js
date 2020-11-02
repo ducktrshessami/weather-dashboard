@@ -219,7 +219,7 @@
     event - a click even from clicking a recently searched location
     */
     function dispHist(event) {
-        if (!event.target.className.includes("active")) {
+        if (!event.target.className.includes("active") && event.target.matches("li")) {
             getCityData(event.target.textContent.trim()).then(displayCity).catch(alert);
         }
     }
