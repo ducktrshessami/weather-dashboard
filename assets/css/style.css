@@ -2,6 +2,26 @@
     height: 2.5rem;
 }
 
+.uvi-low {
+    background-color: #52e735;
+}
+
+.uvi-moderate {
+    background-color: #DCE42F;
+}
+
+.uvi-high {
+    background-color: #CEA237;
+}
+
+.uvi-very-high {
+    background-color: #C42440;
+}
+
+.uvi-extreme {
+    background-color: #C126E2;
+}
+
 aside {
     background-color: #eeeeee;
 }

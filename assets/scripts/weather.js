@@ -16,21 +16,21 @@ uvi - a number containing the UVI
 @returns:
 a string containing the color hex
 */
-function getUVSeverityColor(uvi) {
+function getUVSeverityColorClass(uvi) {
     if (uvi < 3) {
-        return "#52e735";
+        return "uvi-low";
     }
     else if (uvi < 6) {
-        return "#DCE42F";
+        return "uvi-moderate";
     }
     else if (uvi < 8) {
-        return "#CEA237";
+        return "uvi-high";
     }
     else if (uvi < 11) {
-        return "#C42440";
+        return "uvi-very-high";
     }
     else {
-        return "#C126E2";
+        return "uvi-extreme";
     }
 }
 

@@ -105,7 +105,7 @@
         curHumidEl.text(cityData.cache.current.humid + "%");
         curWindEl.text(cityData.cache.current.wind + " MPH");
         curUvEl.text(cityData.cache.current.uv);
-        curUvEl.css("background-color", getUVSeverityColor(cityData.cache.current.uv));
+        curUvEl.attr("class", "p-2 rounded " + getUVSeverityColorClass(cityData.cache.current.uv));
         forecastEl.empty();
         for (let i = 0; i < cityData.cache.forecast.length && i < 5; i++) {
             forecastEl.append(`
